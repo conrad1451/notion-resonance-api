@@ -4,6 +4,7 @@
   "description": "Node.js example server starter project",
   "license": "MIT",
   "main": "index.ts",
+  "type": "module",
   "scripts": {
     "start": "nodemon index.ts"
   },
