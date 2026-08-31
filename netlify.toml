@@ -1,0 +1,30 @@
+[build]
+  functions = "netlify/functions"
+  # No separate site to build — this project is functions-only, so there's
+  # nothing for the "command" to build. If you later add a frontend, put
+  # its build command here.
+  command = "echo 'no site build required'"
+
+[functions]
+  # Lets Netlify bundle and transpile TypeScript functions automatically
+  # using esbuild, both locally (netlify dev) and on deploy. No manual
+  # tsc build step is required for the functions themselves.
+  node_bundler = "esbuild"
+
+# Makes the function reachable at /api/pages instead of the longer
+# default /.netlify/functions/pages path.
+[[redirects]]
+  from = "/api/pages"
+  to = "/.netlify/functions/pages"
+  status = 200
+
+# Mirrors the old Express behavior where "/" and "/users" redirected to "/pages".
+[[redirects]]
+  from = "/"
+  to = "/api/pages"
+  status = 302
+
+[[redirects]]
+  from = "/users"
+  to = "/api/pages"
+  status = 302
